@@ -1,16 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #111;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  overflow: hidden;
+}
+
+h1 {
+  margin: 15px 0;
+  font-size: 24px;
+}
+
+#contador {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+#barraExterior {
+  width: 90%;
+  max-width: 500px;
+  height: 24px;
+  margin: 0 auto 20px;
+  background: #333;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+#barraVida {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, lime, green);
+  transition: 0.2s;
+}
+
+#zona {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  position: relative; /* Para que las onomatopeyas se posicionen respecto a la zona */
+  width: 100%;
+  height: 320px;
+}
+
+#foto {
+  width: 85%;          /* Se adapta perfectamente al ancho del móvil */
+  max-width: 280px;    /* Evita que se haga gigante en pantallas grandes */
+  height: auto;
+  aspect-ratio: 1/1;   /* Mantiene el círculo perfecto */
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid white;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.1s ease;
+}
+
+#foto:active {
+  transform: scale(0.95);
+}
+
 #onomatopeyaTxt {
   display: none;
-  position: absolute;
-  font-size: 36px;
+  position: absolute;  /* Flota en coordenadas libres */
+  z-index: 1000;
+  font-size: 32px;
   font-weight: bold;
-  color: #f1c40f; /* Color amarillo llamativo */
-  text-shadow: 2px 2px 8px #000; /* Sombra negra para que resalte */
-  pointer-events: none; /* Evita que interfiera con los clics en la foto */
+  color: #f1c40f;
+  text-shadow: 2px 2px 6px #000;
+  pointer-events: none;
+  transform: translate(-50%, -50%); /* Centra el texto en el punto aleatorio */
   animation: popEnano 0.3s ease-out;
 }
 
 @keyframes popEnano {
-  0% { transform: scale(0.5); opacity: 0; }
-  50% { transform: scale(1.2); opacity: 1; }
-  100% { transform: scale(1); }
+  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+#ko {
+  display: none;
+  font-size: 40px;
+  font-weight: bold;
+  color: #ff3333;
+  margin-top: 25px;
 }
