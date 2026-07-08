@@ -2,7 +2,6 @@ const foto = document.getElementById("foto");
 const contador = document.getElementById("contador");
 const barra = document.getElementById("barraVida");
 const ko = document.getElementById("ko");
-// Seleccionamos el nuevo elemento del HTML
 const onomatopeyaTxt = document.getElementById("onomatopeyaTxt");
 
 const sonidos = [
@@ -14,14 +13,14 @@ const sonidos = [
 
 const onomatopeyas = [
   "💥 PERCO!",
-  "¼ PERCA!",
+  "💢 PERCA!",
   "👊 MANDATUM!",
   "💣 GOLA!",
   "⚡ PILI!",
   "🔥 DIOLO!",
   "💥 VANAGLORIA!",
   "🥊 VENTO!",
-  "¼ MINERVA!",
+  "💢 MINERVA!",
   "💥 IKER!"
 ];
 
@@ -38,20 +37,26 @@ foto.addEventListener("click", () => {
   contador.textContent = `Golpes: ${golpes}`;
   barra.style.width = `${vida}%`;
 
-  // === LÓGICA DE LAS ONOMATOPEYAS ===
-  // 1. Elegir una al azar
+  // === CÁLCULO DE POSICIÓN ALEATORIA ===
   const palabraAleatoria = onomatopeyas[Math.floor(Math.random() * onomatopeyas.length)];
   onomatopeyaTxt.textContent = palabraAleatoria;
+  
+  // Genera posiciones aleatorias en porcentaje dentro del contenedor de la foto
+  const posX = Math.floor(Math.random() * 60) + 20; // Entre 20% y 80%
+  const posY = Math.floor(Math.random() * 60) + 20; // Entre 20% y 80%
+  
+  onomatopeyaTxt.style.left = posX + "%";
+  onomatopeyaTxt.style.top = posY + "%";
   onomatopeyaTxt.style.display = "block";
 
-  // 2. Hacer que desaparezca un instante después para el próximo golpe
+  // Ocultar la palabra rápido para el siguiente golpe
   setTimeout(() => {
     if (onomatopeyaTxt.textContent === palabraAleatoria) {
       onomatopeyaTxt.style.display = "none";
     }
-  }, 400);
+  }, 350);
 
-  // Reproducir sonido
+  // Sonido
   const sonidoAleatorio = sonidos[Math.floor(Math.random() * sonidos.length)];
   if (sonidoAleatorio) {
     sonidoAleatorio.currentTime = 0;
@@ -60,7 +65,7 @@ foto.addEventListener("click", () => {
 
   if (vida === 0) {
     ko.style.display = "block";
-    onomatopeyaTxt.style.display = "none"; // Ocultar al llegar al K.O.
+    onomatopeyaTxt.style.display = "none";
     foto.style.filter = "grayscale(100%)";
     foto.style.cursor = "not-allowed";
   }
